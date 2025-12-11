@@ -1,0 +1,213 @@
+* ---------------------------------------------------------
+   GLOBAL BACKGROUND + Z-ORDER FOR MATRIX RAIN
+--------------------------------------------------------- */
+
+body {
+  background-color: var(--md-default-bg);
+  color: var(--md-default-fg-color);
+}
+
+.matrix-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.md-content,
+.md-main,
+.md-container,
+[role="main"] {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------
+   GENERIC CARD WRAPPER (used via <div class="dm-card">)
+--------------------------------------------------------- */
+
+.dm-card {
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Remove awkward extra margins at top/bottom of card content */
+.dm-card > :first-child {
+  margin-top: 0;
+}
+.dm-card > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   DARK MODE (Matrix-style) — scheme: slate
+--------------------------------------------------------- */
+
+[data-md-color-scheme="slate"] .dm-card {
+  background: rgba(20, 20, 20, 0.80);          /* gray-black, not pure black */
+  border: 1px solid rgba(120, 255, 170, 0.18); /* grayish green edge */
+
+  box-shadow:
+    0 0 10px rgba(120, 255, 170, 0.08),
+    0 0 22px rgba(120, 255, 170, 0.05);
+}
+
+/* Headings inside cards */
+[data-md-color-scheme="slate"] .dm-card h1,
+[data-md-color-scheme="slate"] .dm-card h2,
+[data-md-color-scheme="slate"] .dm-card h3 {
+  color: #b5ffd0; /* soft Matrix green */
+}
+
+/* Links, tabs, search accent in dark mode */
+[data-md-color-scheme="slate"] a,
+[data-md-color-scheme="slate"] .md-tabs__link {
+  color: #7cffb8;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__item--active {
+  border-bottom: 2px solid #7cffb8;
+}
+
+[data-md-color-scheme="slate"] .md-search__input {
+  color: #e4fff0;
+}
+
+/* ---------------------------------------------------------
+   LIGHT MODE — scheme: default
+--------------------------------------------------------- */
+
+[data-md-color-scheme="default"] .dm-card {
+  background: rgba(245, 245, 245, 0.90);       /* clean light gray */
+  border: 1px solid rgba(0, 150, 80, 0.15);
+
+  box-shadow:
+    0 0 6px rgba(0, 150, 80, 0.08),
+    0 0 12px rgba(0, 150, 80, 0.05);
+}
+
+[data-md-color-scheme="default"] .dm-card h1,
+[data-md-color-scheme="default"] .dm-card h2,
+[data-md-color-scheme="default"] .dm-card h3 {
+  color: #006f3a; /* calm green */
+}
+
+[data-md-color-scheme="default"] a,
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: #008f4a;
+}
+
+[data-md-color-scheme="default"] .md-tabs__item--active {
+  border-bottom: 2px solid #008f4a;
+}
+
+[data-md-color-scheme="default"] .md-search__input {
+  color: #00401f;
+}
+
+/* ---------------------------------------------------------
+   SIDEBARS AS CARDS (left nav + right TOC)
+--------------------------------------------------------- */
+
+/* DARK MODE cards */
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav--secondary {
+  background: rgba(20, 20, 20, 0.75);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin: 1rem;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(120, 255, 170, 0.20);
+  box-shadow:
+    0 0 10px rgba(120, 255, 170, 0.10),
+    0 0 22px rgba(120, 255, 170, 0.08);
+}
+
+/* LIGHT MODE cards — match .dm-card light */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav,
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav--secondary {
+  background: rgba(245, 245, 245, 0.90);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin: 1rem;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 150, 80, 0.15);
+  box-shadow:
+    0 0 6px rgba(0, 150, 80, 0.08),
+    0 0 12px rgba(0, 150, 80, 0.05);
+}
+
+/* Remove inner mini-cards & the white border under sidebar titles */
+.md-sidebar--secondary .md-nav--secondary .md-nav {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--secondary .md-nav__title {
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background: transparent;
+}
+
+/* ---------------------------------------------------------
+   UNIFIED LINK COLORS (left tabs + table of contents)
+--------------------------------------------------------- */
+
+/* DARK MODE links */
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link {
+  color: #b5ffd0 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link:hover {
+  color: #d7ffe6 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link--active {
+  color: #7cffb8 !important;
+  font-weight: 600;
+}
+
+/* LIGHT MODE links */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link {
+  color: #006f3a !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link:hover,
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link:hover {
+  color: #008f4a !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link--active {
+  color: #008f4a !important;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   LIGHT-MODE BACKGROUND OVERRIDE (stay white)
+--------------------------------------------------------- */
+
+[data-md-color-scheme="default"] body {
+  background-color: #ffffff;
+}
+
+.matrix-bg-canvas {
+  background-color: transparent !important;
+}
+
